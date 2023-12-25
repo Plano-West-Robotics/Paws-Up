@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "grade": 5,
+        "subject": "science",
+        "wordList": ["hi", "bye", "aaa"]
+    },
+    {
+        "id": 2,
+        "grade": 5,
+        "subject": "ela",
+        "wordList": ["bru", "hm", "wow"]
+    }
+]

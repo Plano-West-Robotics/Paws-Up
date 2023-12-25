@@ -1,5 +1,13 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import wordLists from '../../TEST.json';
+
+export interface WordList {
+  id: number;
+  grade: number;
+  subject: string;
+  wordList: Array<string>;
+}
 
 const GamePage = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState<number>(0);
@@ -10,11 +18,14 @@ const GamePage = () => {
       try {
 
         const response = await fetch('TEST.txt');
-        const fileContent = await response.text();
+        const fileContent: WordList[] = wordLists;
 
         // Split the content into an array of words using commas as the delimiter
-        const wordsList = fileContent.split(',');
-
+        const wordsList = wordLists.find(element => {return element.id == 2})?.wordList;
+        
+        if (wordsList == undefined) {
+          throw new TypeError('Wordlist expected to have at least one word.');
+        }
         
         const trimmedWordsList = wordsList.map((word) => word.trim());
 
