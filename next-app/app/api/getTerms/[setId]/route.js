@@ -1,4 +1,3 @@
-// pages/api/getTerms/[id].js
 import prisma from '@/lib/prisma.mjs';
 import { NextRequest, NextResponse } from 'next/server';
 
