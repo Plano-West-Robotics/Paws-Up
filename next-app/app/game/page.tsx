@@ -1,18 +1,14 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import TermDisplay from '@/app/components/TermDisplay'
+// Your parent component or page
+import React from 'react';
+import TermDisplay from '../components/TermDisplay';
 
-const GamePage = () => {
-
+const YourPage = () => {
   return (
-    <main>
-      <div>
-        <h1>GamePage</h1>
-<TermDisplay />
-      </div>
-    </main>
+    <div>
+      <h1>Your Page</h1>
+      <TermDisplay termSetId = {1} /> 
+    </div>
   );
-  
 };
 
-export default GamePage;
+export default YourPage;

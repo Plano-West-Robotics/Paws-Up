@@ -1,15 +1,15 @@
 // components/TermDisplay.js
+"use client"
 import React, { useState, useEffect } from 'react';
-import styles from './TermDisplay.module.css'; // Import a CSS module for styling
 
-const TermDisplay = () => {
+const TermDisplay = ({ termSetId }) => {
   const [termsList, setTermsList] = useState([]);
   const [currentTermIndex, setCurrentTermIndex] = useState(0);
 
   useEffect(() => {
     const fetchTerms = async () => {
       try {
-        const response = await fetch('/api/getTerms');
+        const response = await fetch(`/api/getTerms/${termSetId}`);
         const { terms } = await response.json();
         setTermsList(terms);
       } catch (error) {
@@ -18,7 +18,7 @@ const TermDisplay = () => {
     };
 
     fetchTerms();
-  }, []);
+  }, [termSetId]);
 
   const goToNextTerm = () => {
     setCurrentTermIndex((prevIndex) => Math.min(prevIndex + 1, termsList.length - 1));
@@ -29,12 +29,12 @@ const TermDisplay = () => {
   };
 
   return (
-    <div className={styles.termDisplay}>
+    <div>
       <h2>Term Display</h2>
       {termsList.length > 0 && (
-        <div className={styles.termContainer}>
-          <p className={styles.currentTerm}>{termsList[currentTermIndex]}</p>
-          <div className={styles.navigationButtons}>
+        <div>
+          <p>{termsList[currentTermIndex]}</p>
+          <div>
             <button onClick={goToPreviousTerm} disabled={currentTermIndex === 0}>
               Previous
             </button>

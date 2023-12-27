@@ -1,24 +1,24 @@
-// pages/api/getTerms.js
+// pages/api/getTerms/[id].js
 import prisma from '@/lib/prisma.mjs';
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from 'next/server';
 
+export async function GET(request, { params: { setId } }) {
 
-export async function GET(request) {
   try {
     const term = await prisma.termsSet.findUnique({
       where: {
-        id: 1,
+        id: parseInt(setId),
       },
     });
 
     if (term) {
       return NextResponse.json({ terms: term.terms });
     } else {
-      return NextResponse.json({ error: "Term not found" });
+      return NextResponse.json({ error: 'Term not found' }, { status: 404 });
     }
   } catch (error) {
     console.error('Error fetching terms:', error);
-    return NextResponse.json({ error: "Internal Server Error" });
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   } finally {
     await prisma.$disconnect();
   }
