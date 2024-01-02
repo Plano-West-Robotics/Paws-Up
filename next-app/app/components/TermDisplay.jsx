@@ -90,7 +90,7 @@ const TermDisplay = ({ termSetId}) => {
             <p className='text-8xl text-slate-50 text-center font-bold pt-0'>Correct</p>
             <div className='bg-slate-50 overflow-y-auto m-4 px-8 py-4 rounded-3xl text-center text-4xl grow'>
               {correct.map(word => (
-                <ul>
+                <ul key={word}>
                   <li>{word}</li>
                 </ul>
               ))}
@@ -100,7 +100,7 @@ const TermDisplay = ({ termSetId}) => {
             <p className='text-8xl text-slate-50 text-center font-bold pt-0'>Review</p>
             <div className='bg-slate-50 overflow-y-auto m-4 px-8 py-4 rounded-3xl text-center text-4xl grow'>
               {passed.map(word => (
-                <ul>
+                <ul key={word}>
                   <li>{word}</li>
                 </ul>
               ))}
