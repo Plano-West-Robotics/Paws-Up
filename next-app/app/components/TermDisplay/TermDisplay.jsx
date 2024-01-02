@@ -66,7 +66,7 @@ const TermDisplay = ({ termSetId}) => {
   const [showDivRed, setShowDivRed] = useState(false);
 
   const handleRedButtonClick = (event, id) => {
-    setAsCorrect(id);
+    setAsPassed(id);
     setAnimateRed(true);
   
     const x = event.clientX;
