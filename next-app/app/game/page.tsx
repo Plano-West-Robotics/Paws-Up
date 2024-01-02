@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import TermDisplay from '../components/TermDisplay';
+import TermDisplay from '../components/TermDisplay/TermDisplay';
 
 // change the 1 with the id of the selected list but should be good for the purposes of demonstration
 
