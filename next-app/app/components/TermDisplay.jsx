@@ -1,6 +1,5 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 
 const TermDisplay = ({ termSetId}) => {
   const [termsList, setTermsList] = useState([]);
