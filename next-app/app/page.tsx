@@ -21,7 +21,7 @@ export default function Home() {
         </div>
         <div className='lg:w-1/2'></div>
       </div>
-      <Image src="/dog.png" className="object-cover invisible lg:visible h-auto absolute right-0 bottom-0 z-10" width={700} height={450} alt="A cute cartoon dog"/>
+      <Image src="/dog.png" className="object-cover invisible lg:visible absolute right-0 bottom-0 z-10" width={700} height={450} alt="A cute cartoon dog"/>
     </main>
   )
 }
