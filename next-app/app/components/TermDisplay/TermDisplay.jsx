@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Timer from '../Timer/Timer';
+import './styles.css'
+
 
 const TermDisplay = ({ termSetId}) => {
   const [termsList, setTermsList] = useState([]);
@@ -40,6 +42,45 @@ const TermDisplay = ({ termSetId}) => {
     }
   }
 
+  const [animateGreen, setAnimateGreen] = useState(false);
+  const [position, setPosition] = useState({ x: '', y: '' });
+  const [showDivGreen, setShowDivGreen] = useState(false);
+
+
+  const handleGreenButtonClick = (event, id) => {
+    setAsCorrect(id);
+    setAnimateGreen(true);
+  
+    const x = event.clientX;
+    const y = event.clientY;
+  
+    setPosition({ x, y });
+    
+    setShowDivGreen(true);
+    setTimeout(() => {
+      setAnimateGreen(false);
+      setShowDivGreen(false);
+    }, 2000); // Replace 2000 with the duration of your animation in milliseconds
+  }
+  const [animateRed, setAnimateRed] = useState(false);
+  const [showDivRed, setShowDivRed] = useState(false);
+
+  const handleRedButtonClick = (event, id) => {
+    setAsCorrect(id);
+    setAnimateRed(true);
+  
+    const x = event.clientX;
+    const y = event.clientY;
+  
+    setPosition({ x, y });
+    
+    setShowDivRed(true);
+    setTimeout(() => {
+      setAnimateRed(false);
+      setShowDivRed(false);
+    }, 2000); // Replace 2000 with the duration of your animation in milliseconds
+  }
+
   const setAsPassed = (id) => {
     setPassed(passed => ([...passed, termsList[id]]));
     if (id !== termsList.length) {
@@ -64,10 +105,41 @@ const TermDisplay = ({ termSetId}) => {
         <Timer expiryTimestamp={() => setTimer()} onExpire={() => setCurrentTermIndex(termsList.length)}/>
         <i className="fas fa-arrow-right text-gray-500 hover:text-gray-600 fixed fa-4x pb-2 pt-1 right-4 hover:cursor-pointer" onClick={() => setCurrentTermIndex(termsList.length)}></i>
         <div className='flex flex-row w-screen h-[calc(100%-5rem+8px)] items-end mt-[calc(5rem-8px)]'>
-          <button className='hover:bg-green-500 w-1/2 h-full' onClick={() => setAsCorrect(currentTermIndex)}>
+
+
+
+        <button className={` w-1/2 h-full`} onClick={(event) => handleGreenButtonClick(event, currentTermIndex)}>
+        </button>
+
+        {showDivGreen && <div
+    className={`greenCircle top:1/2 left:1/2 ring-8 rounded-full ring-green-300 fixed z-3 -translate-y-1/2 -translate-x-1/2 h-16 w-16 ${animateGreen ? 'animate' : ''}`}
+    style={{
+      top: `${position.y}px`,
+      left: `${position.x}px`,
+    }}
+
+    
+
+  ></div>}
+
+
+
+          <button className=' w-1/2 h-full' onClick={(event) => handleRedButtonClick(event,currentTermIndex)}>
           </button>
-          <button className='hover:bg-red-500 w-1/2 h-full' onClick={() => setAsPassed(currentTermIndex)}>
-          </button>
+
+          {showDivRed && <div
+    className={`redCircle top:1/2 left:1/2 ring-8 rounded-full ring-red-300 fixed z-3 -translate-y-1/2 -translate-x-1/2 h-16 w-16 ${animateRed ? 'animate' : ''}`}
+    style={{
+      top: `${position.y}px`,
+      left: `${position.x}px`,
+    }}
+
+    
+
+  ></div>}
+
+
+
         </div>
 
         <div className='absolute left-0 top-0 h-screen w-screen pointer-events-none'>

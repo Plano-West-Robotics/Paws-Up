@@ -1,0 +1,16 @@
+@keyframes myAnimation {
+  0% {
+
+    transform: scale(0);
+  }
+    
+    100%{
+        transform: scale(5500%);
+    }
+}
+
+.animate{
+
+    animation: myAnimation 2s;
+    
+}
