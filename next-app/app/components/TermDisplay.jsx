@@ -1,15 +1,20 @@
 "use client"
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
-const TermDisplay = ({ termSetId }) => {
+const TermDisplay = ({ termSetId}) => {
   const [termsList, setTermsList] = useState([]);
   const [currentTermIndex, setCurrentTermIndex] = useState(0);
+
+  var [correct, setCorrect] = useState([]);
+  var [passed, setPassed] = useState([]);
 
   useEffect(() => {
     const fetchTerms = async () => {
       try {
         const response = await fetch(`/api/getTerms/${termSetId}`);
         const { terms } = await response.json();
+
         setTermsList(terms);
       } catch (error) {
         console.error('Error fetching terms:', error);
@@ -17,33 +22,58 @@ const TermDisplay = ({ termSetId }) => {
     };
 
     fetchTerms();
+
+
   }, [termSetId]);
 
-  const goToNextTerm = () => {
-    setCurrentTermIndex((prevIndex) => Math.min(prevIndex + 1, termsList.length - 1));
-  };
+  const setAsCorrect = (id) => {
+    setCorrect(correct => ([...correct, termsList[id]]));
+    if (id !== termsList.length) {
+      setCurrentTermIndex(id+1);
+    } else {
+     
+    }
+  }
 
-  const goToPreviousTerm = () => {
-    setCurrentTermIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
+  const setAsPassed = (id) => {
+    setPassed(passed => ([...passed, termsList[id]]));
+    if (id !== termsList.length) {
+      setCurrentTermIndex(id+1);
+    } else {
+     
+    }
+  }
 
   return (
-    <div>
-      <h2>Term Display</h2>
-      {termsList.length > 0 && (
+    <main>
+      {termsList.length == 0 || currentTermIndex < termsList.length ? (
+      <>
+        <h2>Term Display</h2>
         <div>
-          <p>{termsList[currentTermIndex]}</p>
-          <div>
-            <button onClick={goToPreviousTerm} disabled={currentTermIndex === 0}>
-              Previous
-            </button>
-            <button onClick={goToNextTerm} disabled={currentTermIndex === termsList.length - 1}>
-              Next
-            </button>
-          </div>
+          {termsList.length > 0 ? (
+            <p>{termsList[currentTermIndex]}</p>
+          ) : (
+            <p>Loading terms...</p>
+          )}
+        
+            <div>
+              <button className='bg-green-500 hover:bg-green-600 px-5 py-2 mr-10 rounded-lg' onClick={() => setAsCorrect(currentTermIndex)}>
+                Correct
+              </button>
+              <button className='bg-red-500 hover:bg-red-600 px-5 py-2 rounded-lg' onClick={() => setAsPassed(currentTermIndex)}>
+                Pass
+              </button>
+            </div>
         </div>
+      </>
+      ) : (
+      <>
+        <h1>Results</h1>
+        <p>Correct: {correct.toString()}</p>
+        <p>Need to review: {passed.toString()}</p>
+      </>
       )}
-    </div>
+    </main>
   );
 };
 
