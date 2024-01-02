@@ -11,6 +11,9 @@ const TermDisplay = ({ termSetId}) => {
   var [correct, setCorrect] = useState([]);
   var [passed, setPassed] = useState([]);
 
+  const seconds = 15;
+  const time = new Date();
+
   useEffect(() => {
     const fetchTerms = async () => {
       try {
@@ -47,7 +50,8 @@ const TermDisplay = ({ termSetId}) => {
   }
 
   const setTimer = () => {
-    time.setSeconds(time.getSeconds + seconds);
+    time.setSeconds(time.getSeconds() + seconds);
+    return time;
   }
 
   return (
@@ -57,7 +61,7 @@ const TermDisplay = ({ termSetId}) => {
       </Link>
       {termsList.length == 0 || currentTermIndex < termsList.length? (
       <>
-        <Timer onExpire={() => setCurrentTermIndex(termsList.length)}/>
+        <Timer expiryTimestamp={() => setTimer()} onExpire={() => setCurrentTermIndex(termsList.length)}/>
         <i className="fas fa-arrow-right text-gray-500 hover:text-gray-600 fixed fa-4x pb-2 pt-1 right-4 hover:cursor-pointer" onClick={() => setCurrentTermIndex(termsList.length)}></i>
         <div className='flex flex-row w-screen h-[calc(100%-5rem+8px)] items-end mt-[calc(5rem-8px)]'>
           <button className='hover:bg-green-500 w-1/2 h-full' onClick={() => setAsCorrect(currentTermIndex)}>

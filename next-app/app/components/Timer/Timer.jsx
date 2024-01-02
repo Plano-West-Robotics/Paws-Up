@@ -2,7 +2,7 @@
 import React from 'react';
 import { useTimer } from 'react-timer-hook';
 
-function TimerFunc({ expiryTimestamp, onExpire}) {
+function TimerFunc({ expiryTimestamp, onExpire }) {
   const {
     totalSeconds,
     isRunning,
@@ -20,13 +20,10 @@ function TimerFunc({ expiryTimestamp, onExpire}) {
     );
 }
 
-export default function Timer({onExpire}) {
-    const seconds = 15;
-    const time = new Date();
-    time.setSeconds(time.getSeconds() + seconds);
+export default function Timer({ expiryTimestamp, onExpire }) {
     return (
         <>
-        <TimerFunc expiryTimestamp={time} onExpire={onExpire}/>
+        <TimerFunc expiryTimestamp={expiryTimestamp} onExpire={onExpire}/>
         </>
     );
 }
