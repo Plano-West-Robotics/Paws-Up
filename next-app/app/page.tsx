@@ -14,8 +14,8 @@ export default function Home() {
           <p className='md:w-5/12 w-full xl:text-4xl md:text-3xl text-xl font-bold text-center text-pretty lg:pb-32 md:pb-10 pb-5'>Unlock your true Paw-tential!</p>
 
           <div className='lg:pb-10 md:py-5 py-3 flex sm:flex-row flex-col'>
-            <Link href='/game' className='bg-amber-400 hover:bg-amber-500 rounded-3xl xl:p-4 p-3 sm:text-7xl text-5xl text-white font-bold text-center mb-3 sm:mr-5 sm:mb-0 shrink-0'>Start!</Link> 
-            <Link href='/help' className='bg-amber-400 hover:bg-amber-500 rounded-3xl xl:p-4 p-3 sm:text-7xl text-5xl text-white font-bold text-center shrink-0'>Help</Link>
+            <Link href='/game' className='bg-amber-400 hover:bg-amber-500 rounded-3xl xl:p-4 p-3 xl:text-8xl sm:text-7xl text-5xl text-white font-bold text-center mb-3 sm:mr-5 sm:mb-0 shrink-0'>Start!</Link> 
+            <Link href='/help' className='bg-amber-400 hover:bg-amber-500 rounded-3xl xl:p-4 p-3 xl:text-8xl sm:text-7xl text-5xl text-white font-bold text-center shrink-0'>Help</Link>
           </div>
 
         </div>

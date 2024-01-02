@@ -88,7 +88,7 @@ const TermDisplay = ({ termSetId}) => {
         <div className='absolute left-0 bottom-0 flex flex-row w-screen h-[calc(100%-5rem+8px)] items-stretch'>
           <div className='w-1/2 mt-8 mb-4 flex flex-col'>
             <p className='text-8xl text-slate-50 text-center font-bold pt-0'>Correct</p>
-            <div className='bg-slate-50 overflow-y-auto m-4 px-8 py-4 rounded-3xl text-center text-4xl grow'>
+            <div className='bg-slate-50 overflow-y-auto m-4 px-8 py-4 rounded-3xl text-center text-5xl grow'>
               {correct.map(word => (
                 <ul key={word}>
                   <li>{word}</li>
@@ -98,7 +98,7 @@ const TermDisplay = ({ termSetId}) => {
           </div>
           <div className='w-1/2 mt-8 mb-4 flex flex-col'>
             <p className='text-8xl text-slate-50 text-center font-bold pt-0'>Review</p>
-            <div className='bg-slate-50 overflow-y-auto m-4 px-8 py-4 rounded-3xl text-center text-4xl grow'>
+            <div className='bg-slate-50 overflow-y-auto m-4 px-8 py-4 rounded-3xl text-center text-5xl grow'>
               {passed.map(word => (
                 <ul key={word}>
                   <li>{word}</li>
