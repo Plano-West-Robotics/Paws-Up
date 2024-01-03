@@ -13,8 +13,10 @@ const TermDisplay = ({ termSetId}) => {
   var [correct, setCorrect] = useState([]);
   var [passed, setPassed] = useState([]);
 
-  const seconds = 15;
+  const seconds = 30;
   const time = new Date();
+
+  const animationMs = 1000;
 
   useEffect(() => {
     const fetchTerms = async () => {
@@ -60,7 +62,7 @@ const TermDisplay = ({ termSetId}) => {
     setTimeout(() => {
       setAnimateGreen(false);
       setShowDivGreen(false);
-    }, 2000); // Replace 2000 with the duration of your animation in milliseconds
+    }, animationMs); // Replace 2000 with the duration of your animation in milliseconds
   }
   const [animateRed, setAnimateRed] = useState(false);
   const [showDivRed, setShowDivRed] = useState(false);
@@ -78,7 +80,7 @@ const TermDisplay = ({ termSetId}) => {
     setTimeout(() => {
       setAnimateRed(false);
       setShowDivRed(false);
-    }, 2000); // Replace 2000 with the duration of your animation in milliseconds
+    }, animationMs); // Replace 2000 with the duration of your animation in milliseconds
   }
 
   const setAsPassed = (id) => {
@@ -102,44 +104,28 @@ const TermDisplay = ({ termSetId}) => {
       </Link>
       {termsList.length == 0 || currentTermIndex < termsList.length? (
       <>
-        <Timer expiryTimestamp={() => setTimer()} onExpire={() => setCurrentTermIndex(termsList.length)}/>
         <i className="fas fa-arrow-right text-gray-500 hover:text-gray-600 fixed fa-4x pb-2 pt-1 right-4 hover:cursor-pointer" onClick={() => setCurrentTermIndex(termsList.length)}></i>
         <div className='flex flex-row w-screen h-[calc(100%-5rem+8px)] items-end mt-[calc(5rem-8px)]'>
 
-
-
-        <button className={` w-1/2 h-full`} onClick={(event) => handleGreenButtonClick(event, currentTermIndex)}>
+        <button className='w-1/2 h-full' onClick={(event) => handleGreenButtonClick(event, currentTermIndex)}>
         </button>
 
         {showDivGreen && <div
-    className={`greenCircle top:1/2 left:1/2 ring-8 rounded-full ring-green-300 fixed z-3 -translate-y-1/2 -translate-x-1/2 h-16 w-16 ${animateGreen ? 'animate' : ''}`}
-    style={{
-      top: `${position.y}px`,
-      left: `${position.x}px`,
-    }}
+          className={`greenCircle top:1/2 left:1/2 ring-8 rounded-full ring-green-300 fixed z-3 -translate-y-1/2 -translate-x-1/2 h-16 w-16 ${animateGreen ? 'animate' : ''}`}
+          style={{
+            top: `${position.y}px`,
+            left: `${position.x}px`,
+        }}></div>}
 
-    
+        <button className='w-1/2 h-full' onClick={(event) => handleRedButtonClick(event, currentTermIndex)}>
+        </button>
 
-  ></div>}
-
-
-
-          <button className=' w-1/2 h-full' onClick={(event) => handleRedButtonClick(event,currentTermIndex)}>
-          </button>
-
-          {showDivRed && <div
-    className={`redCircle top:1/2 left:1/2 ring-8 rounded-full ring-red-300 fixed z-3 -translate-y-1/2 -translate-x-1/2 h-16 w-16 ${animateRed ? 'animate' : ''}`}
-    style={{
-      top: `${position.y}px`,
-      left: `${position.x}px`,
-    }}
-
-    
-
-  ></div>}
-
-
-
+        {showDivRed && <div
+          className={`redCircle top:1/2 left:1/2 ring-8 rounded-full ring-red-300 fixed z-3 -translate-y-1/2 -translate-x-1/2 h-16 w-16 ${animateRed ? 'animate' : ''}`}
+          style={{
+            top: `${position.y}px`,
+            left: `${position.x}px`,
+        }}></div>}
         </div>
 
         <div className='absolute left-0 top-0 h-screen w-screen pointer-events-none'>
@@ -154,7 +140,10 @@ const TermDisplay = ({ termSetId}) => {
           </div>
 
           {termsList.length > 0 ? (
-            <p className='text-[11rem]/[1] font-bold bg-slate-50 w-fit px-8 pt-6 pb-4 rounded-3xl shadow-lg text-center mx-auto mt-80 z-20'>{termsList[currentTermIndex]}</p>
+            <>
+              <Timer expiryTimestamp={() => setTimer()} onExpire={() => setCurrentTermIndex(termsList.length)}/>
+              <p className='text-[11rem]/[1] font-bold bg-slate-50 w-fit px-8 pt-6 pb-4 rounded-3xl shadow-lg text-center mx-auto mt-80 z-20'>{termsList[currentTermIndex]}</p>
+            </>
           ) : (
             <p className='text-[9rem]/[1] font-semibold bg-slate-50 w-fit px-8 pt-6 pb-1 rounded-3xl shadow-lg text-center mx-auto mt-80 z-20'>Loading terms...</p>
           )}
