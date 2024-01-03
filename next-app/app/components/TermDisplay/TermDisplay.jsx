@@ -142,7 +142,7 @@ const TermDisplay = ({ termSetId}) => {
           {termsList.length > 0 ? (
             <>
               <Timer expiryTimestamp={() => setTimer()} onExpire={() => setCurrentTermIndex(termsList.length)}/>
-              <p className='text-[11rem]/[1] font-bold bg-slate-50 w-fit px-8 pt-6 pb-4 rounded-3xl shadow-lg text-center mx-auto mt-80 z-20'>{termsList[currentTermIndex]}</p>
+              <p className={`text-[${Math.max(13+Math.round(-termsList[currentTermIndex].length/3), 3)}rem]/[1] font-bold bg-slate-50 w-fit px-8 pt-6 pb-4 rounded-3xl shadow-lg text-center mx-auto mt-80 z-20`}>{termsList[currentTermIndex]}</p>
             </>
           ) : (
             <p className='text-[9rem]/[1] font-semibold bg-slate-50 w-fit px-8 pt-6 pb-1 rounded-3xl shadow-lg text-center mx-auto mt-80 z-20'>Loading terms...</p>
@@ -161,7 +161,7 @@ const TermDisplay = ({ termSetId}) => {
             <div className='bg-slate-50 overflow-y-auto m-4 px-8 py-4 rounded-3xl text-center text-5xl grow'>
               {correct.map(word => (
                 <ul key={word}>
-                  <li>{word}</li>
+                  <li className='text-pretty truncate'>{word}</li>
                 </ul>
               ))}
             </div>
@@ -171,7 +171,7 @@ const TermDisplay = ({ termSetId}) => {
             <div className='bg-slate-50 overflow-y-auto m-4 px-8 py-4 rounded-3xl text-center text-5xl grow'>
               {passed.map(word => (
                 <ul key={word}>
-                  <li>{word}</li>
+                  <li className='text-pretty truncate'>{word}</li>
                 </ul>
               ))}
             </div>
