@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma.mjs';
 
-export default function GET({ termSet }) {
+export default function GET(request, { termSet }) {
   return (
     <div>
       <h1>{termSet.name}</h1>
