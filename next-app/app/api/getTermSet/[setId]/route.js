@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma.mjs';
 
-export default function TermSet({ termSet }) {
+export default function FETCH({ termSet }) {
   return (
     <div>
       <h1>{termSet.name}</h1>
