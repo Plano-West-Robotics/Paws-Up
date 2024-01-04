@@ -2,13 +2,28 @@ import Link from 'next/link';
 
 export default function Tile({ id, name, gradeLvl, subject }) {
   return (
-    <div style={{ border: '1px solid white', padding: '15px', margin: '10px 0px' }}>
-      <Link href={`/game/play/${id}`}>
-        {name}
-      </Link>
-      <h4>{gradeLvl}</h4>
-      <h4>{subject}</h4>
-      <h4>{id}</h4>
+    <div
+      style={{
+        backgroundColor: '#ffffff',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        borderRadius: '8px',
+        padding: '16px',
+        margin: '10px 0px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+      }}
+    >
+      <h3 style={{ marginBottom: '8px' }}>
+        <Link href={`/game/play/${id}`} passHref>
+          <div style={{ textDecoration: 'none', color: '#333333', fontWeight: 'bold', cursor: 'pointer' }}>
+            {name}
+          </div>
+        </Link>
+      </h3>
+      <p style={{ marginBottom: '4px' }}>Grade: {gradeLvl}</p>
+      <p style={{ marginBottom: '4px' }}>Subject: {subject}</p>
+      <p>ID: {id}</p>
     </div>
   );
 }
