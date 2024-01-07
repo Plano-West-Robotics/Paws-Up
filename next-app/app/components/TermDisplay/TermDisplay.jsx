@@ -142,7 +142,9 @@ const TermDisplay = ({ termSetId}) => {
           {termsList.length > 0 ? (
             <>
               <Timer expiryTimestamp={() => setTimer()} onExpire={() => setCurrentTermIndex(termsList.length)}/>
-              <p className={`text-[${Math.max(13+Math.round(-termsList[currentTermIndex].length/3), 3)}rem]/[1] font-bold bg-slate-50 w-fit px-8 pt-6 pb-4 rounded-3xl shadow-lg text-center mx-auto mt-80 z-20`}>{termsList[currentTermIndex]}</p>
+              <div className='absolute top-[calc(50%+3.5%)] left-0 h-full w-full'>
+                <p className={`text-[${Math.max(13+Math.round(-termsList[currentTermIndex].length/3), 3)}rem]/[1] font-bold bg-slate-50 w-fit h-fit px-8 pt-6 pb-4 rounded-3xl shadow-lg text-center mx-auto -translate-y-1/2 z-20`}>{termsList[currentTermIndex]}</p>
+              </div>
             </>
           ) : (
             <p className='text-[9rem]/[1] font-semibold bg-slate-50 w-fit px-8 pt-6 pb-1 rounded-3xl shadow-lg text-center mx-auto mt-80 z-20'>Loading terms...</p>
