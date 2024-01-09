@@ -49,7 +49,7 @@ export default function Home() {
         </div>
         <div className='lg:w-1/2'></div>
       </div>
-      <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)' }}>
+      <div style={{ position: 'absolute', top: '20%', left: '60%', transform: 'translateX(-50%)' }}>
         <Image
           src="/paws.png"
           className="object-cover"

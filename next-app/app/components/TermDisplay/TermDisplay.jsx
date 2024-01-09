@@ -5,6 +5,12 @@ import Image from 'next/image';
 import Timer from '../Timer/Timer';
 import './styles.css'
 
+function shuffle(list) {
+  shuffleList = list.sort(()=> Math.random() - 0.5)
+  console.log(shuffleList)
+  return shuffleList
+}
+
 
 const TermDisplay = ({ termSetId}) => {
   const [termsList, setTermsList] = useState([]);
@@ -22,7 +28,7 @@ const TermDisplay = ({ termSetId}) => {
     const fetchTerms = async () => {
       try {
         const response = await fetch(`/api/getTerms/${termSetId}`);
-        const { terms } = await response.json();
+         var { terms } = await response.json();
 
         setTermsList(terms);
       } catch (error) {
