@@ -31,15 +31,6 @@ export default function Home() {
   const pawsWidthPercentage = 15; // Adjust this percentage as needed
   const pawsHeightPercentage = 15; // Adjust this percentage as needed
 
-  const pawsContainerStyle = {
-    position: 'absolute',
-    top: '20%',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: `${windowSize.width * (pawsWidthPercentage / 100)}px`,
-    height: `${windowSize.height * (pawsHeightPercentage / 100)}px`,
-  };
-
   return (
     <main className='bg-gradient-to-r from-green-200 to-blue-300 relative'>
 
@@ -58,7 +49,7 @@ export default function Home() {
         </div>
         <div className='lg:w-1/2'></div>
       </div>
-      <div style={pawsContainerStyle}>
+      <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)' }}>
         <Image
           src="/paws.png"
           className="object-cover"
@@ -67,13 +58,14 @@ export default function Home() {
           alt="Cartoon paws"
         />
       </div>
+
       <Image
         src="/dog.png"
         className="object-cover absolute right-0 bottom-0 z-10"
-        width={windowSize.width * (dogWidthPercentage / 100)}
-        height={windowSize.height * (dogHeightPercentage / 100)}
         alt="A cute cartoon dog"
         priority
+        width={windowSize.width * (dogWidthPercentage / 100)}
+        height={windowSize.height * (dogHeightPercentage / 100)}
       />
     </main>
   );
