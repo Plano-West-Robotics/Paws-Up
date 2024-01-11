@@ -5,13 +5,28 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [pawsPosition, setPawsPosition] = useState({
+    top: '30%',
+    left: '40%',
+    transform: 'translateX(-50%)',
+  });
 
   useEffect(() => {
     function handleResize() {
-      setWindowSize({
+      const newWindowSize = {
         width: window.innerWidth,
         height: window.innerHeight,
-      });
+      };
+
+      // Adjust positioning of paws image based on window size
+      const newPawsPosition = {
+        top: `${newWindowSize.height * 0.30}px`,
+        left: `${newWindowSize.width * 0.4}px`,
+        transform: 'translateX(-50%)',
+      };
+
+      setWindowSize(newWindowSize);
+      setPawsPosition(newPawsPosition);
     }
 
     // Set initial window size
@@ -26,18 +41,25 @@ export default function Home() {
     };
   }, []); // Empty dependency array means this effect runs once after the initial render
 
-  const dogWidthPercentage = 40; // Adjust this percentage as needed
-  const dogHeightPercentage = 30; // Adjust this percentage as needed
-  const pawsWidthPercentage = 15; // Adjust this percentage as needed
-  const pawsHeightPercentage = 15; // Adjust this percentage as needed
+  const dogWidthPercentage = 40;
+  const dogHeightPercentage = 30;
 
   return (
     <main className='bg-gradient-to-r from-green-200 to-blue-300 relative'>
 
       <div className='flex flex-row h-[calc(100vh-2rem)] z-0'>
         <div className='lg:w-1/2 w-full self-center flex flex-col items-center'>
-          <div className='relative'>
-            <h1 className='xl:text-10xl md:text-9xl text-7xl font-bold text-nowrap text-center'>Paws Up!</h1>
+          <div className='flex py-19'>
+            <h1 className='xl:text-10xl md:text-9xl text-7xl font-bold  text-center'>Paws Up!</h1>
+            <div style={{ position: 'absolute', ...pawsPosition }}>
+              <Image
+                src="/paws.png"
+                className="object-cover"
+                width={210}
+                height={210}
+                alt="Cartoon paws"
+              />
+            </div>
           </div>
           <p className='md:w-5/12 w-full xl:text-5xl md:text-4xl text-2xl font-bold text-center text-pretty lg:pb-16 md:pb-6 pb-3'>Unlock your true Paw-tential!</p>
 
@@ -48,15 +70,6 @@ export default function Home() {
 
         </div>
         <div className='lg:w-1/2'></div>
-      </div>
-      <div style={{ position: 'absolute', top: '20%', left: '60%', transform: 'translateX(-50%)' }}>
-        <Image
-          src="/paws.png"
-          className="object-cover"
-          width={windowSize.width * (pawsWidthPercentage / 100)}
-          height={windowSize.height * (pawsHeightPercentage / 100)}
-          alt="Cartoon paws"
-        />
       </div>
 
       <Image
