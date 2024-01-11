@@ -6,7 +6,7 @@ import Timer from '../Timer/Timer';
 import './styles.css'
 
 
-const TermDisplay = React.memo(({ finalTermsList}) => {
+const TermDisplay = (({ finalTermsList}) => {
 
   const [currentTermIndex, setCurrentTermIndex] = useState(0);
   const termsList = finalTermsList;
