@@ -1,14 +1,27 @@
-"use client";
 import React from 'react';
 import TermDisplay from '@/app/components/TermDisplay/TermDisplay';
+import prisma from '@/lib/prisma.mjs';
 
-interface GamePageProps {
-  params: {
-    setId: string;
-  };
+async function getTermsList(setId){
+  let termset = await prisma.termsSet.findUnique({
+    where: {
+      id: parseInt(setId),
+    },
+  })
+    prisma.$disconnect();
+  return termset;
 }
 
-const GamePage: React.FC<GamePageProps> = ({ params: { setId } }) => {
+function shuffle(list) {
+  let shuffleList = list.sort(()=> Math.random() - 0.5)
+  return shuffleList
+}
+
+export default async function GamePage({ params: { setId } }) {
+  let termsSet = await getTermsList(setId)
+  let termsList = termsSet.terms
+  let shuffledTermsList = shuffle(termsList)
+
   return (
     <>
       <link
@@ -23,9 +36,9 @@ const GamePage: React.FC<GamePageProps> = ({ params: { setId } }) => {
           <div className="bg-red-400 hover:bg-red-500 w-1/2 h-full redDiv"></div>
         </div>
       </div>
-      <TermDisplay termSetId={parseInt(setId)} />
+      <TermDisplay finalTermsList={shuffledTermsList} />
     </>
   );
 };
 
-export default GamePage;
+

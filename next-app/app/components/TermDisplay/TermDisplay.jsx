@@ -1,20 +1,15 @@
-"use client"
-import React, { useState, useEffect } from 'react';
+'use client'
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Timer from '../Timer/Timer';
 import './styles.css'
 
-function shuffle(list) {
-  shuffleList = list.sort(()=> Math.random() - 0.5)
-  console.log(shuffleList)
-  return shuffleList
-}
 
+const TermDisplay = React.memo(({ finalTermsList}) => {
 
-const TermDisplay = ({ termSetId}) => {
-  const [termsList, setTermsList] = useState([]);
   const [currentTermIndex, setCurrentTermIndex] = useState(0);
+  const termsList = finalTermsList;
 
   var [correct, setCorrect] = useState([]);
   var [passed, setPassed] = useState([]);
@@ -23,23 +18,6 @@ const TermDisplay = ({ termSetId}) => {
   const time = new Date();
 
   const animationMs = 1000;
-
-  useEffect(() => {
-    const fetchTerms = async () => {
-      try {
-        const response = await fetch(`/api/getTerms/${termSetId}`);
-         var { terms } = await response.json();
-
-        setTermsList(terms);
-      } catch (error) {
-        console.error('Error fetching terms:', error);
-      }
-    };
-
-    fetchTerms();
-
-
-  }, [termSetId]);
 
   const setAsCorrect = (id) => {
     setCorrect(correct => ([...correct, termsList[id]]));
@@ -190,6 +168,6 @@ const TermDisplay = ({ termSetId}) => {
       )}
     </div>
   );
-};
+});
 
 export default TermDisplay;
