@@ -12,10 +12,10 @@ generator client {
 }
 
 model termsSet {
-    id          Int       @id @default(autoincrement())
-    name    String 
+    id          Int       @id @default(autoincrement()) 
     gradeLvl    Int 
     subject    String 
     terms   String[]
-
+    standard String
+    topic String
 }

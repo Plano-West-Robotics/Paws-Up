@@ -1,27 +1,22 @@
-const fs = require('fs');
+import prisma from '@/lib/prisma.mjs';
+import Tile from '@/app/components/TermSetTile/TermSetTile';
 
-const readFileAndExtractWords = (filePath) => {
-  try {
+async function getTermSets() {
+  const sets = await prisma.termsSet.findMany();
+  return sets;
+}
 
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-
-    // Split the content into an array of words using commas as the delimiter
-    const wordsList = fileContent.split(',');
-
-    // Trim whitespace from each word
-    const trimmedWordsList = wordsList.map((word) => word.trim());
-
-    return trimmedWordsList;
-  } catch (error) {
-    console.error('Error reading file:', error.message);
-    return null;
-  }
-};
-
-const filePath = 'TEST.txt';
-
-const wordsList = readFileAndExtractWords(filePath);
-
-if (wordsList) {
-  console.log('List of words:', wordsList);
+export default async function Home() {
+  const terms = await getTermSets();
+  console.log(terms)
+  return (
+    <main className="bg-gradient-to-r from-green-200 to-blue-300">
+      <section>
+        <h1 className="text-4xl font-bold text-center mt-10 mb-5">All Sets</h1>
+        {terms.map((term) => (
+          <Tile key={term.id} id={term.id} name={term.name} gradeLvl={term.gradeLvl} subject={term.subject} />
+        ))}
+      </section>
+    </main>
+  );
 }
