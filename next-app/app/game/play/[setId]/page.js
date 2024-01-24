@@ -12,15 +12,35 @@ async function getTermsList(setId){
   return termset;
 }
 
-function shuffle(list) {
-  let shuffleList = list.sort(()=> Math.random() - 0.5)
-  return shuffleList
+function shuffledIndex(list) {
+    var indexes = Array.from(Array(list.length).keys());
+    let shuffleList = indexes.sort(() => Math.random() - 0.5);
+    return shuffleList;
+}
+
+function reorderList(list, orderIndexes) {
+  // Create a copy of the original list to avoid modifying it directly
+  const newList = [...list];
+
+  // Create a new array to store the reordered list
+  const reorderedList = Array(list.length);
+
+  // Populate the reorderedList based on orderIndexes
+  orderIndexes.forEach((newIndex, originalIndex) => {
+    reorderedList[newIndex] = newList[originalIndex];
+  });
+
+  return reorderedList;
 }
 
 export default async function GamePage({ params: { setId } }) {
   let termsSet = await getTermsList(setId)
   let termsList = termsSet.terms
-  let shuffledTermsList = shuffle(termsList)
+  let imagesList = termsSet.images
+  let shuffledIndexList = shuffledIndex(termsList)
+  let shuffledTermsList = reorderList(termsList,shuffledIndexList)
+  let shuffledImagesList = reorderList(imagesList, shuffledIndexList)
+
 
   return (
     <>
@@ -36,7 +56,7 @@ export default async function GamePage({ params: { setId } }) {
           <div className="bg-red-400 hover:bg-red-500 w-1/2 h-full redDiv"></div>
         </div>
       </div>
-      <TermDisplay finalTermsList={shuffledTermsList} />
+      <TermDisplay finalTermsList={shuffledTermsList} finalImagesList={shuffledImagesList}/>
     </>
   );
 };
