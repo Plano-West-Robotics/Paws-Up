@@ -7,6 +7,5 @@ export default function Home() {
             <div>ELO: 3000</div>
             <div>RANK: 1</div>
         </div>
-        
     )
 };
