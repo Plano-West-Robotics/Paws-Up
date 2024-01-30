@@ -126,16 +126,28 @@ const TermDisplay = (({ finalTermsList, finalImagesList}) => {
             {termsList.length > 0 ? (
               <>
                 <Timer expiryTimestamp={() => setTimer()} onExpire={() => setCurrentTermIndex(termsList.length)} />
-                <div className="column-2 relative h-[50%] w-[50%] absolute top-1/4 left-1/4">
-  <div className='fixed left-1/2 -translate-x-1/2 top-1/3 transform -translate-y-1/3'>
-    <img src={imagesList[currentTermIndex]} alt="Term Image" />
-  </div>
-  <div className='fixed left-1/2 -translate-x-1/2 top-3/4 transform -translate-y-3/4'>
-    <p className={`text-[${Math.max(13 + Math.round(-termsList[currentTermIndex].length / 3), 3)}rem]/[1] font-bold bg-slate-50 w-fit h-fit px-8 pt-6 pb-4 rounded-3xl shadow-lg inline-block`}>
-      {termsList[currentTermIndex]}
-    </p>
-  </div>
+                {imagesList[currentTermIndex] != null ?(
+              <div className="column-2 relative h-[50%] w-[50%] absolute top-1/4 left-1/4">
+                <div className='fixed left-1/2 -translate-x-1/2 top-1/3 transform -translate-y-1/3'>
+    
+              <img src={imagesList[currentTermIndex]} />
+
+              </div>
+              <div className='fixed left-1/2 -translate-x-1/2 top-3/4 transform -translate-y-3/4'>
+              <p className={`text-[${Math.max(13 + Math.round(-termsList[currentTermIndex].length / 3), 3)}rem]/[1] font-bold bg-slate-50 w-fit h-fit px-8 pt-6 pb-4 rounded-3xl shadow-lg inline-block`}>
+              {termsList[currentTermIndex]}
+              </p>
+              </div>
+              </div>)
+  :
+(
+  <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'> 
+  <p className={`text-[${Math.max(13 + Math.round(-termsList[currentTermIndex].length / 3), 3)}rem]/[1] font-bold bg-slate-50 w-fit h-fit px-8 pt-6 pb-4 rounded-3xl shadow-lg inline-block`}>
+    {termsList[currentTermIndex]}
+  </p>
 </div>
+)}
+
 
         </>
             ) : (
