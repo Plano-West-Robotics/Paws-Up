@@ -10,6 +10,7 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@ariakit/react": "^0.4.1",
     "@prisma/client": "^5.7.1",
     "@types/node": "20.10.5",
     "@types/react": "18.2.45",
@@ -21,11 +22,13 @@
     "postcss": "8.4.32",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-modal": "^3.16.1",
     "react-timer-hook": "^3.0.7",
     "tailwindcss": "3.4.0",
     "typescript": "5.3.3"
   },
   "devDependencies": {
+    "@types/react-modal": "^3.16.3",
     "daisyui": "^4.4.24",
     "prisma": "^5.7.1",
     "ts-node": "^10.9.2"

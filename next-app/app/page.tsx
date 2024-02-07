@@ -2,6 +2,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import * as Ariakit from "@ariakit/react";
+
 
 export default function Home() {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
@@ -46,7 +48,6 @@ export default function Home() {
 
   return (
     <main className='bg-gradient-to-r from-green-200 to-blue-300 relative'>
-
       <div className='flex flex-row h-[calc(100vh-2rem)] z-0'>
         <div className='lg:w-1/2 w-full self-center flex flex-col items-center'>
           <div className='flex py-19'>
@@ -64,14 +65,30 @@ export default function Home() {
           <p className='md:w-5/12 w-full xl:text-5xl md:text-4xl text-2xl font-bold text-center text-pretty lg:pb-16 md:pb-6 pb-3'>Unlock your true Paw-tential!</p>
 
           <div className='lg:pb-8 md:py-4 py-2 flex sm:flex-row flex-col'>
-            <Link href='/game' className='bg-amber-400 hover:bg-amber-500 rounded-3xl xl:p-4 p-3 xl:text-7xl sm:text-6xl text-4xl text-white font-bold text-center mb-2 sm:mr-3 sm:mb-0 shrink-0'>Start!</Link> 
+            <Ariakit.PopoverProvider>
+              <Ariakit.PopoverDisclosure>
+                <div className='bg-amber-400 hover:bg-amber-500 rounded-3xl xl:p-4 p-3 xl:text-7xl sm:text-6xl text-4xl text-white font-bold text-center mb-2 sm:mr-3 sm:mb-0 shrink-0'>
+                  Start!
+                </div>
+              </Ariakit.PopoverDisclosure>
+              <Ariakit.Popover >
+                <Ariakit.PopoverArrow/>
+                <div className='padding-y-5'></div>
+                  <Ariakit.Button>
+                    <Link href="/game" className="bg-amber-400 hover:bg-amber-500 rounded-3xl xl:p-4 p-3 xl:text-7xl sm:text-6xl text-4xl text-white font-bold text-center mb-2 sm:mr-3 sm:mb-0 shrink-0">Online
+                    </Link>
+                  </Ariakit.Button>
+                  <Ariakit.Button >
+                    <Link href="/local"className="bg-amber-400 hover:bg-amber-500 rounded-3xl xl:p-4 p-3 xl:text-7xl sm:text-6xl text-4xl text-white font-bold text-center mb-2 sm:mr-3 sm:mb-0 shrink-0">Local
+                    </Link>
+                  </Ariakit.Button>
+              </Ariakit.Popover>
+            </Ariakit.PopoverProvider>
             <Link href='/help' className='bg-amber-400 hover:bg-amber-500 rounded-3xl xl:p-4 p-3 xl:text-7xl sm:text-6xl text-4xl text-white font-bold text-center shrink-0'>Help</Link>
+            </div>
           </div>
-
-        </div>
         <div className='lg:w-1/2'></div>
       </div>
-
       <Image
         src="/dog.png"
         className="object-cover absolute right-0 bottom-0 z-10"
