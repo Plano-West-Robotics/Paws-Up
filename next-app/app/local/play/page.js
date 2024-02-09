@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import TermDisplay from '@/app/components/TermDisplay/TermDisplayLocal';
+import TermDisplay from '@/app/components/TermDisplayLocal/TermDisplayLocal';
 
 function shuffledIndex(list) {
   var indexes = Array.from(Array(list.length).keys());
