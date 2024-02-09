@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Timer from '../Timer/Timer';
-import './styles.css'
 
 
 const TermDisplay = (({ finalTermsList, finalImagesList}) => {
