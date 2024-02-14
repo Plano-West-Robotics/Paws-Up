@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Timer from '../Timer/Timer';
+import './styles.css';
 
 
 const TermDisplay = (({ finalTermsList, finalImagesList}) => {
@@ -125,7 +126,7 @@ const TermDisplay = (({ finalTermsList, finalImagesList}) => {
             {termsList.length > 0 ? (
               <>
                 <Timer expiryTimestamp={() => setTimer()} onExpire={() => setCurrentTermIndex(termsList.length)} />
-                {imagesList[currentTermIndex] != null ?(
+                {imagesList[currentTermIndex] != null && imagesList[currentTermIndex] !== ""?(
               <div className="column-2 relative h-[50%] w-[50%] absolute top-1/4 left-1/4">
                 <div className='fixed left-1/2 -translate-x-1/2 top-1/3 transform -translate-y-1/3'>
     

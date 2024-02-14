@@ -39,7 +39,7 @@ export default function GamePage() {
   if (!shuffledTermsList.length) {
     return <div>Loading...</div>;
   }
-
+  console.log(shuffledImagesList)
   return (
     <>
       <link

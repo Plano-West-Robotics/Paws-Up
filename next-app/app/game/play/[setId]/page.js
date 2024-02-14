@@ -2,6 +2,7 @@ import React from 'react';
 import TermDisplay from '@/app/components/TermDisplay/TermDisplay';
 import prisma from '@/lib/prisma.mjs';
 
+
 async function getTermsList(setId){
   let termset = await prisma.termsSet.findUnique({
     where: {
@@ -41,7 +42,6 @@ export default async function GamePage({ params: { setId } }) {
   let shuffledTermsList = reorderList(termsList,shuffledIndexList)
   let shuffledImagesList = reorderList(imagesList, shuffledIndexList)
 
-
   return (
     <>
       <link
@@ -56,7 +56,7 @@ export default async function GamePage({ params: { setId } }) {
           <div className="bg-red-400 hover:bg-red-500 w-1/2 h-full redDiv"></div>
         </div>
       </div>
-      <TermDisplay finalTermsList={shuffledTermsList} finalImagesList={shuffledImagesList}/>
+      <TermDisplay finalTermsList={shuffledTermsList} finalImagesList={shuffledImagesList} />
     </>
   );
 };

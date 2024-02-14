@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Timer from '../Timer/Timer';
 import './styles.css'
+import {useRouter} from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 
 const TermDisplay = (({ finalTermsList, finalImagesList}) => {
@@ -11,6 +13,10 @@ const TermDisplay = (({ finalTermsList, finalImagesList}) => {
   const [currentTermIndex, setCurrentTermIndex] = useState(0);
   const termsList = finalTermsList;
   const imagesList = finalImagesList;
+  
+  const router = useRouter();
+  const pathname = usePathname();
+  
 
   var [correct, setCorrect] = useState([]);
   var [passed, setPassed] = useState([]);
@@ -28,6 +34,7 @@ const TermDisplay = (({ finalTermsList, finalImagesList}) => {
      
     }
   }
+
 
   const [animateGreen, setAnimateGreen] = useState(false);
   const [position, setPosition] = useState({ x: '', y: '' });
@@ -85,8 +92,10 @@ const TermDisplay = (({ finalTermsList, finalImagesList}) => {
   return (
     <div className='fixed z-0 left-0 top-0 h-screen w-screen'>
       <Link href='/'>
-        <i className="fas fa-home text-gray-500 hover:text-gray-600 fixed fa-4x pb-2 pt-1 left-4"></i>
+        <i className="fas fa-home text-gray-500 hover:text-gray-600 fixed fa-4x pb-2 pt-1 left-4"></i> 
       </Link>
+      <h1 onClick={() => window.location.reload()} className="text-6xl font-bold fixed text-nowrap  text-gray-500 hover:text-gray-600 hover:cursor-pointer" >replay</h1>
+
       {termsList.length === 0 || currentTermIndex < termsList.length ? (
         <>
         <i className="fas fa-arrow-right text-gray-500 hover:text-gray-600 fixed fa-4x pb-2 pt-1 right-4 hover:cursor-pointer" onClick={() => setCurrentTermIndex(termsList.length)}></i>
@@ -126,7 +135,7 @@ const TermDisplay = (({ finalTermsList, finalImagesList}) => {
             {termsList.length > 0 ? (
               <>
                 <Timer expiryTimestamp={() => setTimer()} onExpire={() => setCurrentTermIndex(termsList.length)} />
-                {imagesList[currentTermIndex] != null ?(
+                {imagesList[currentTermIndex] != null && imagesList[currentTermIndex] !== ""?(
               <div className="column-2 relative h-[50%] w-[50%] absolute top-1/4 left-1/4">
                 <div className='fixed left-1/2 -translate-x-1/2 top-1/3 transform -translate-y-1/3'>
     
@@ -160,6 +169,8 @@ const TermDisplay = (({ finalTermsList, finalImagesList}) => {
       ) : (
         <>
           <div className='absolute w-fit right-4 top-2 flex flex-row'>
+
+
             <Image src="/paws_red.png" className="absolute object-cover z-10 -top-4 right-64" width={100} height={100} alt="Cartoon paws" />
             <h1 className='text-6xl font-bold text-nowrap text-center'>Paws Up!</h1>
           </div>
