@@ -9,12 +9,17 @@ export default function Home() {
   const [list, setList] = useState([]);
   const [imageList, setImageList] = useState([]);
   const [imagePreview, setImagePreview] = useState(null);
+  const MAX_IMAGE_HEIGHT = 451;
+  const MAX_IMAGE_WIDTH = 601;
+
+
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
   const handleAddToList = () => {
+    
     if (inputValue.trim() !== '') {
       setList([...list, inputValue]);
       setInputValue('');
@@ -29,7 +34,43 @@ export default function Home() {
   };
 
   const handleAddImageToList = (base64Image) => {
-    setImagePreview(base64Image);
+    const img = new Image();
+    img.src = base64Image;
+
+    img.onload = () => {
+      let newWidth = img.width;
+      let newHeight = img.height;
+  
+      // Check if the image exceeds the maximum dimensions
+      if (img.width > MAX_IMAGE_WIDTH || img.height > MAX_IMAGE_HEIGHT) {
+        // Calculate new dimensions while maintaining aspect ratio
+        const aspectRatio = img.width / img.height;
+        if (aspectRatio > 1) {
+          // Landscape orientation
+          newWidth = MAX_IMAGE_WIDTH;
+          newHeight = MAX_IMAGE_WIDTH / aspectRatio;
+        } else {
+          // Portrait or square orientation
+          newHeight = MAX_IMAGE_HEIGHT;
+          newWidth = MAX_IMAGE_HEIGHT * aspectRatio;
+        }
+      }
+      
+      // Create a canvas to draw the resized image
+      const canvas = document.createElement('canvas');
+      canvas.width = newWidth;
+      canvas.height = newHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, newWidth, newHeight);
+      
+      // Convert the canvas to base64 encoded image
+      const resizedBase64Image = canvas.toDataURL('image/jpeg');
+      console.log(canvas.width,canvas.height);
+  
+      // Set the resized image as the preview
+      setImagePreview(resizedBase64Image);
+    };
+
   };
 
   const playGame = () => {
